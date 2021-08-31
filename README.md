@@ -1,6 +1,5 @@
 ## BarChart
-[My widget description]
-
+Bar Chart+  React + TypeScript + Echarts + Mendix+Pluggable widget 
 ## Features
 [feature highlights]
 
