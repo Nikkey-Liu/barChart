@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget id="mendix.barchart.BarChart" pluginWidget="true" needsEntityContext="true" offlineCapable="true" supportedPlatform="Web"
+    xmlns="http://www.mendix.com/widget/1.0/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
+    <name>Bar Chart</name>
+    <description>My widget description</description>
+    <icon>iVBORw0KGgoAAAANSUhEUgAAACgAAAAlCAIAAAC/AjzkAAAAAXNSR0IArs4c6QAA AARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAASdEVYdFNvZnR3 YXJlAEdyZWVuc2hvdF5VCAUAAACuSURBVFhHYwgpODYgaNRiuqEha3Fq3Zn/SGD/ yVdoCnAhSi2un3IFaicYXLn9EU0BLjRqMaloMFoMFYIBuDgEEWtxfOUpoB1wBBen ucVAE6EGgAHc7lGLybZ45fbHyAguTnOLoapgAC4+avGoxVAwajESgItD0KjFUFUw ABcfvhbvOPwcqBmCzlx5BxcHlttwcSCCi+NpZeIyCoLQLaYbGrWYbmjUYrqhkWZx wTEAF27YT7Zup7AAAAAASUVORK5CYII=</icon>
+    <properties>
+        <!-- 自定义配置属性 基本属性配置 -->
+        <propertyGroup caption="General">
+            <property key="ChartTitle" type="string" required="false">
+                <caption>ChartTitle</caption>
+                <description></description>
+            </property>
+            <property key="mysubtitle" type="string" required="false">
+                <caption>Subtitle of chart</caption>
+                <description>Subtitle of chart</description>
+            </property>
+            <property key="barChartMode" type="enumeration" defaultValue="basicBar">
+                <caption>Bar mode</caption>
+                <description/>
+                <enumerationValues>
+                    <enumerationValue key="basicBar">basic Bar</enumerationValue>
+                    <enumerationValue key="StackedPolarBar">Stacked Polar Bar</enumerationValue>
+                    <enumerationValue key="RStackedPolarBar">Radial Stacked Polar Bar</enumerationValue>
+                    <enumerationValue key="RoundedPolarBar">Rounded  Polar Bar</enumerationValue>
+                </enumerationValues>
+            </property>
+            <property key="RoundedPolarBarAngle" type="integer" defaultValue="30">
+                <caption>StartAngle</caption>
+                <description></description>
+            </property>
+            <property key="myObject" type="object" isList="true">
+                <caption>My object list</caption>
+                <description/>
+                <properties>
+                    <!-- 自定义配置属性 数据源配置 -->
+                    <propertyGroup caption="DataSource">
+                        <!-- <property key="myObjectBool" type="boolean" defaultValue="true">
+                            <caption>My boolean</caption>
+                            <description>My boolean setting</description>
+                        </property> -->
+                        <property key="seriesName" type="string" required="false">
+                            <caption>This Bar series name</caption>
+                            <description></description>
+                        </property>
+                        <property key="seriesDataSource" type="datasource" isList="true" required="true">
+                            <caption>Series Data source</caption>
+                            <description />
+                        </property>
+                        <property key="xValueAttribute" type="attribute" dataSource="seriesDataSource" required="true">
+                            <caption>xValueAttribute</caption>
+                            <description>Data points</description>
+                            <attributeTypes>
+                                <attributeType name="String"/>
+                                <attributeType name="Decimal"/>
+                                <attributeType name="Long"/>
+                                <attributeType name="Integer"/>
+                                <attributeType name="DateTime"/>
+                                <attributeType name="Enum"/>
+                            </attributeTypes>
+                        </property>
+                        <property key="yValueAttribute" type="attribute" dataSource="seriesDataSource" required="true">
+                            <caption>yValueAttribute</caption>
+                            <description>Data points</description>
+                            <attributeTypes>
+                                <attributeType name="Decimal"/>
+                                <attributeType name="Long"/>
+                                <attributeType name="Integer"/>
+                            </attributeTypes>
+                        </property>
+                    </propertyGroup>
+                    <!-- 自定义配置属性 bar展示 配置 -->
+                    <propertyGroup caption="Appearance">
+                        <property key="showLable" type="boolean" defaultValue="false">
+                            <caption>Show Label on bar</caption>
+                            <description></description>
+                        </property>
+                        <property key="stackbar" type="boolean" defaultValue="false">
+                            <caption>stack bar</caption>
+                            <description/>
+                        </property>
+                        <property key="stackName" type="string" required="false">
+                            <caption>stack name</caption>
+                            <description></description>
+                        </property>
+                        <property key="barColor" type="string" required="false">
+                            <caption>This bar Color</caption>
+                            <description>If null will use default color</description>
+                        </property>
+
+                        <property key="borderColor" type="string" required="false">
+                            <caption>This bar border Color</caption>
+                            <description>If null will use default color</description>
+                        </property>
+                        <property key="borderWidth" type="integer" required="true" defaultValue="0">
+                            <caption>This bar border width</caption>
+                            <description></description>
+                        </property>
+                        <property key="showBackground" type="boolean" defaultValue="false">
+                            <caption>Show Background on bar</caption>
+                            <description></description>
+                        </property>
+                    </propertyGroup>
+                    <propertyGroup caption="Event and Advance">
+                        <property key="onBarClick" type="action">
+                            <caption>On bar Click</caption>
+                            <description>Action to be performed when this bar Click</description>
+                        </property>
+                        <property key="BarJsondata" type="string" multiline="true" required="false">
+                            <caption>bar Series Json Data Config</caption>
+                            <description>this Data will merge with this bar option</description>
+                        </property>
+                    </propertyGroup>
+
+                </properties>
+            </property>
+            <property key="ChartTheme" type="enumeration" defaultValue="default">
+                <caption>Chart Theme</caption>
+                <description/>
+                <enumerationValues>
+                    <enumerationValue key="default">default</enumerationValue>
+                    <enumerationValue key="light">light</enumerationValue>
+                    <enumerationValue key="dark">dark</enumerationValue>
+                </enumerationValues>
+            </property>
+            <property key="XLabel" type="string" defaultValue="X" required="false">
+                <caption>XLabel</caption>
+                <description></description>
+            </property>
+            <property key="YLabel" type="string" defaultValue="Y" required="false">
+                <caption>YLabel</caption>
+                <description></description>
+            </property>
+            <property key="ShowLegend" type="boolean" defaultValue="true">
+                <caption>Show Legend</caption>
+                <description></description>
+            </property>
+            <property key="ShowLegendWay" type="enumeration" defaultValue="horizontal">
+                <caption>Show Legend Way</caption>
+                <description/>
+                <enumerationValues>
+                    <enumerationValue key="horizontal">horizontal</enumerationValue>
+                    <enumerationValue key="vertical">vertical</enumerationValue>
+                </enumerationValues>
+            </property>
+            <property key="ShowChartVertical" type="boolean" defaultValue="false">
+                <caption>Show vertical</caption>
+                <description></description>
+            </property>
+            <property key="showDatazoom" type="boolean" defaultValue="false">
+                <caption>Show Datazoom</caption>
+                <description></description>
+            </property>
+            <property key="showLoading" type="boolean" defaultValue="false">
+                <caption>Show Loading animation</caption>
+                <description>展示加载动画</description>
+            </property>
+            <property key="loadingTime" type="integer" defaultValue="1">
+                <caption>Loading Time </caption>
+                <description>LoadingTime:ss 加载时间：秒</description>
+            </property>
+        </propertyGroup>
+        <!-- 自定义配置属性 advance -->
+        <propertyGroup caption="Advance">
+            <property key="Jsondata" type="string" multiline="true" required="false">
+                <caption>Json Data Config</caption>
+                <description>this Data will merge with option</description>
+            </property>
+            <!-- <property key="showLabelRotation" type="boolean" defaultValue="false">
+                <caption>show Label Rotation</caption>
+                <description></description>
+            </property> -->
+        </propertyGroup>
+        <!-- 自定义配置属性 Event -->
+        <propertyGroup caption="Event">
+            <property key="onChartLegendselectchanged" type="action">
+                <caption>On click Legend select changed</caption>
+                <description>Action to be performed when Legend select changed</description>
+            </property>
+        </propertyGroup>
+        <!-- 自定义配置属性 appearance -->
+        <propertyGroup caption="Appearance">
+            <property key="widthUnit" type="enumeration" defaultValue="percentage">
+                <caption>Width unit</caption>
+                <description/>
+                <enumerationValues>
+                    <enumerationValue key="percentage">Percentage</enumerationValue>
+                    <enumerationValue key="pixels">Pixels</enumerationValue>
+                </enumerationValues>
+            </property>
+            <property key="width" type="integer" defaultValue="100">
+                <caption>Width</caption>
+                <description/>
+            </property>
+            <property key="heightUnit" type="enumeration" defaultValue="pixels">
+                <caption>Height unit</caption>
+                <description>'Percentage of width' is the aspect ratio, 'Pixels' is absolute. Warning: When using 'Percentage of parent' the parent container must have an absolute height, else nothing is displayed.</description>
+                <enumerationValues>
+                    <enumerationValue key="percentageOfWidth">Percentage of width</enumerationValue>
+                    <enumerationValue key="pixels">Pixels</enumerationValue>
+                    <enumerationValue key="percentageOfParent">Percentage of parent</enumerationValue>
+                </enumerationValues>
+            </property>
+            <property key="height" type="integer" defaultValue="400">
+                <caption>Height</caption>
+                <description/>
+            </property>
+        </propertyGroup>
+    </properties>
+</widget>
