@@ -28,6 +28,7 @@ export default class BarChart extends Component<BarChartContainerProps> {
         this.onChartClick = this.onChartClick.bind(this);
     }
     componentDidUpdate() {
+        this.clearData();
         let numberObject = 0;
         // 数据加载状态更新
         this.props.myObject.forEach(item => {
@@ -87,14 +88,21 @@ export default class BarChart extends Component<BarChartContainerProps> {
             console.log(this.getOption());
             this.echartsReact.getEchartsInstance().setOption(this.getOption());
         }
+        this.countSeries = 0;     // 归零Bar计数
     }
-    componentWillUnmount() {
+    clearData(){
         while (this.seriesName.length) {
             this.seriesName.pop();
-            this.seriesList.pop();
-            this.datasetList.pop();
-            this.countSeries = 0; // 归零Bar计数
         }
+        while (this.seriesList.length){
+            this.seriesList.pop();
+        }
+        while (this.datasetList.length){
+            this.datasetList.pop();
+        }
+    }
+    componentWillUnmount() {
+        this.clearData();
     }
     // 第一种方式dimension的方式设置dataset来解决不同x 轴bar 的问题
     getDataSetByDimension(item: MyObjectType, sortFlag: boolean) {
@@ -404,6 +412,7 @@ export default class BarChart extends Component<BarChartContainerProps> {
         });
         console.log("echarts on click" + e.seriesName);
         if (this.barNameToAction.has(e.seriesName)) {
+            this.componentWillUnmount();
             this.barNameToAction.get(e.seriesName).execute();
             console.log(
                 "echarts on click execute inform ：如果想点击显示的数据请在外部配置dataview来显示，目前widget执行微流不支持传递参数"
@@ -413,6 +422,7 @@ export default class BarChart extends Component<BarChartContainerProps> {
     onChartLegendselectchanged() {
         console.log("legendSlectchanged");
         if (this.props.onChartLegendselectchanged != null && this.props.onChartLegendselectchanged.canExecute) {
+            this.componentWillUnmount();
             this.props.onChartLegendselectchanged.execute();
         }
     }
