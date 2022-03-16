@@ -88,16 +88,16 @@ export default class BarChart extends Component<BarChartContainerProps> {
             console.log(this.getOption());
             this.echartsReact.getEchartsInstance().setOption(this.getOption());
         }
-        this.countSeries = 0;     // 归零Bar计数
+        this.countSeries = 0; // 归零Bar计数
     }
-    clearData(){
+    clearData() {
         while (this.seriesName.length) {
             this.seriesName.pop();
         }
-        while (this.seriesList.length){
+        while (this.seriesList.length) {
             this.seriesList.pop();
         }
-        while (this.datasetList.length){
+        while (this.datasetList.length) {
             this.datasetList.pop();
         }
     }
